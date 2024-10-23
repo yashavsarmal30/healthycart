@@ -1,252 +1,213 @@
-Practical 2
+class MethodOverloading {
+    // Overloaded method for adding two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
 
-// Encapsulation example in Java
+    // Overloaded method for adding three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    public static void main(String[] args) {
+        MethodOverloading mo = new MethodOverloading();
+        System.out.println("Sum of two numbers: " + mo.add(5, 10));
+        System.out.println("Sum of three numbers: " + mo.add(5, 10, 15));
+    }
+}
+
+
+class MyThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i + " - Thread running");
+            try {
+                Thread.sleep(1000); // sleep for 1 second
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+    }
+}
+
+
+public class ExceptionHandling {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;  // This will throw ArithmeticException
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        } finally {
+            System.out.println("This block will always execute.");
+        }
+    }
+}
+
+
+
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.sound(); // Calls the overridden method
+    }
+}
+
+
+public class Loops {
+    public static void main(String[] args) {
+        // For loop example
+        System.out.println("For loop:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Iteration " + i);
+        }
+
+        // While loop example
+        System.out.println("While loop:");
+        int i = 1;
+        while (i <= 5) {
+            System.out.println("Iteration " + i);
+            i++;
+        }
+    }
+}
+
+
+
 class Student {
-// Private variables - cannot be accessed directly from outside the class
-private String name;
-private int age;
-private String course;
-// Public getter method for name
-public String getName() {
-return name;
+    private String name;
+    private int age;
+
+    // Getter method for name
+    public String getName() {
+        return name;
+    }
+
+    // Setter method for name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter method for age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter method for age
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Age should be positive");
+        }
+    }
 }
-// Public setter method for name
-public void setName(String name) {
-this.name = name;
-}
-// Public getter method for age
-public int getAge() {
-return age;
-}
-// Public setter method for age
-public void setAge(int age) {
-if (age > 0) { // Encapsulation allows us to add validation
-this.age = age;
-} else {
-System.out.println("Age must be positive.");
-}
-}
-// Public getter method for course
-public String getCourse() {
-return course;
-// Public setter method for course
-public void setCourse(String course) {
-this.course = course;
-}
-}
-public class Main {
-public static void main(String[] args) {
-// Creating an object of the Student class
-Student student = new Student();
-// Setting values using setter methods
-student.setName("John Doe");
-student.setAge(20);
-student.setCourse("Computer Science");
-// Getting values using getter methods
-System.out.println("Name: " + student.getName());
-System.out.println("Age: " + student.getAge());
-System.out.println("Course: " + student.getCourse());
-// Example of validation - setting an invalid age
-student.setAge(-5); // This will print a validation message
-}
+
+public class EncapsulationExample {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("John");
+        s.setAge(20);
+        System.out.println("Student Name: " + s.getName());
+        System.out.println("Student Age: " + s.getAge());
+    }
 }
 
 
 
-// Exception handling example in Java
-public class Main {
-public static void main(String[] args)
-{ try {
-// Example of arithmetic exception
-int result = divide(10, 0);
-System.out.println("Result: " + result);
-// Example of array index out of bounds exception int[]
-numbers = {1, 2, 3};
-System.out.println("Number at index 3: " + numbers[3]); // This will throw an
-exception
-} catch (ArithmeticException e) {
-// Handling division by zero
-System.out.println("Error: Division by zero is not allowed.");
-} catch (ArrayIndexOutOfBoundsException e) {
-// Handling invalid array index access
-System.out.println("Error: Array index is out of bounds.");
-} finally {
-// Code in the finally block always executes, even if an exception is thrown
-System.out.println("Execution of the try-catch block is finished.");
+//array for 10
+class Student {
+    String name;
+    int age;
+
+    Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
 }
-// Demonstrating the use of 'throw' to manually throw an exception
-try {
-validateAge(15); // This will throw an exception since age is less than 18
-} catch (IllegalArgumentException e)
-{ System.out.println("Error: " + e.getMessage());
+
+public class ArrayExample {
+    public static void main(String[] args) {
+        Student[] students = new Student[10];
+
+        // Initializing 10 students
+        for (int i = 0; i < 10; i++) {
+            students[i] = new Student("Student" + (i + 1), 18 + i);
+        }
+
+        // Printing student details
+        for (Student s : students) {
+            s.display();
+        }
+    }
 }
+
+//custome exception
+class AgeException extends Exception {
+    AgeException(String message) {
+        super(message);
+    }
 }
-// Method that throws an ArithmeticException
-public static int divide(int a, int b) {
-return a / b; // This will throw an ArithmeticException if b is 0
-}
-// Method that throws an IllegalArgumentException if age is less than 18
-public static void validateAge(int age) {
-if (age < 18) {
-throw new IllegalArgumentException("Age must be at least 18.");
-} else {
-System.out.println("Access granted.");
-}
-}
+
+public class CustomExceptionExample {
+    static void checkAge(int age) throws AgeException {
+        if (age < 18) {
+            throw new AgeException("Age less than 18 is not allowed");
+        } else {
+            System.out.println("Age is valid");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            checkAge(16);
+        } catch (AgeException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
 }
 
 
-[22/10, 8:20 am] Yash⁹⁹⁹.: // Thread management and synchronization in Java
-// Bank class to represent a shared resource (bank account)
-class Bank {
-private int balance = 1000; // Initial balance
-// Method to withdraw money (synchronized to prevent race conditions)
-public synchronized void withdraw(int amount, String name) {
-System.out.println(name + " is trying to withdraw " + amount + " units.");
-if (balance >= amount) {
-System.out.println(name + " is proceeding with the withdrawal.");
-balance -= amount;
-System.out.println(name + " completed the withdrawal. Remaining balance: " + balance);
-} else {
-System.out.println(name + " attempted to withdraw, but insufficient balance. Current balance: " + balance);
+import javax.swing.*;
+
+public class SwingExample {
+    public static void main(String[] args) {
+        // Create a new JFrame
+        JFrame frame = new JFrame("Swing Example");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create a new label
+        JLabel label = new JLabel("Hello, Swing!", SwingConstants.CENTER);
+
+        // Add label to the frame
+        frame.add(label);
+
+        // Set frame visibility
+        frame.setVisible(true);
+    }
 }
-}
-}
-// Customer class to represent a thread that will attempt to withdraw money
-class Customer extends Thread {
-private Bank bank;
-private int amount;
-private String customerName;
-// Constructor
-public Customer(Bank bank, int amount, String name)
-{this.bank = bank;
-this.amount = amount;
-this.customerName = name;
-}
-// The run method of the thread
-public void run() {
-bank.withdraw(amount, customerName);
-}
-}
-public class Main {
-public static void main(String[] args) {
-// Shared Bank object (shared resource)
-Bank bank = new Bank();
-// Creating multiple Customer threads, trying to withdraw from the same account
-Customer customer1 = new Customer(bank, 500, "Customer 1");
-Customer customer2 = new Customer(bank, 700, "Customer 2");
-Customer customer3 = new Customer(bank, 300, "Customer 3");
-// Starting the threads
-customer1.start();
-customer2.start();
-customer3.start();
-// Joining threads to ensure they complete before the program ends
-try {
-customer1.join();
-customer2.join();
-customer3.join();
-} catch (InterruptedException e)
-{e.printStackTrace();
-}
-System.out.println("All transactions are completed.");
-}
-}
-[22/10, 8:21 am] Yash⁹⁹⁹.: % Tower of Hanoi
-move(1, Source, Destination, _) :- write('Move disk from '), write(Source), write(' to '), write(Destination), nl. move(N, Source, Destination, Auxiliary) :- N > 1, M is N - 1, move(M, Source, Auxiliary, Destination), move(1, Source, Destination, _), move(M, Auxiliary, Destination, Source). % Example query:
-% ?- hanoi(3, 'A', 'C', 'B').
-[22/10, 8:21 am] Yash⁹⁹⁹.: %Simple Arithmetic Operations declaration programing concept 
-%Family Relationships
-%List Operations
-%Animal Database
-%The Grandparent Relationship Program
-%All 5 programs in one
-% 1. Arithmetic Operations
-add(X, Y, Z) :- Z is X + Y. subtract(X, Y, Z) :- Z is X - Y. multiply(X, Y, Z) :- Z is X * Y. divide(X, Y, Z) :- Y \= 0, Z is X / Y. % 2. Family Relationships
-parent(john, mary). parent(john, james). parent(mary, sophie). sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y. % 3.Rule for grandparent
-grandparent(X, Y) :- parent(X, Z), parent(Z, Y). % 4. List Operations (renamed to avoid conflict)
-list_length([], 0). list_length([_|Tail], N) :- list_length(Tail, N1), N is N1 + 1. member(X, [X|_]). member(X, [_|Tail]) :- member(X, Tail). % 5. Animal Database
-animal(dog). animal(cat). animal(bird). animal(fish). is_pet(X) :- animal(X), member(X, [dog, cat, bird]).
 
 
 
-
-%Simple Arithmetic Operations declaration programing concept 
-%Family Relationships
-%List Operations
-%Animal Database
-%The Grandparent Relationship Program
-%All 5 programs in one
-% 1. Arithmetic Operations
-add(X, Y, Z) :- Z is X + Y. subtract(X, Y, Z) :- Z is X - Y. multiply(X, Y, Z) :- Z is X * Y. divide(X, Y, Z) :- Y \= 0, Z is X / Y. % 2. Family Relationships
-parent(john, mary). parent(john, james). parent(mary, sophie). sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y. % 3.Rule for grandparent
-grandparent(X, Y) :- parent(X, Z), parent(Z, Y). % 4. List Operations (renamed to avoid conflict)
-list_length([], 0). list_length([_|Tail], N) :- list_length(Tail, N1), N is N1 + 1. member(X, [X|_]). member(X, [_|Tail]) :- member(X, Tail). % 5. Animal Database
-animal(dog). animal(cat). animal(bird). animal(fish). is_pet(X) :- animal(X), member(X, [dog, cat, bird]).
-
-
-module Main where
--- Recursive function to calculate Fibonacci sequence
-fibonacci :: Integer -> Integer
-fibonacci 0 = 0
-fibonacci 1 = 1
-fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
--- Function to generate a list of the first n Fibonacci numbers
-fibonacciList :: Integer -> [Integer]
-fibonacciList n = [fibonacci x | x <- [0..n-1]]
--- Main function to display Fibonacci sequence
-main :: IO ()
-main = do
-let n = 10 -- Number of Fibonacci numbers to generate
-putStrLn $ "First " ++ show n ++ " Fibonacci numbers: " ++ show (fibonacciList n)
-
-
-
-module Main where
-import Data.List (intercalate)
--- The initial state of the board
-initialBoard :: [Int]
-initialBoard = [5, 4, 3, 2, 1]
--- Function to display the board
-displayBoard :: [Int] -> IO ()
-displayBoard board = do
-putStrLn "Current Board:" mapM_ (putStrLn . (\(i, n) -> show i ++ ": " ++ replicate n '*')) (zip [1..] board)
--- Function to check if the game is over
-isGameOver :: [Int] -> Bool
-isGameOver board = all (== 0) board
--- Function to perform a player's turn
-makeMove :: [Int] -> Int -> Int -> [Int]
-makeMove board row stars =
-let newBoard = take (row - 1) board ++ [board !! (row - 1) - stars] ++ drop row
-board
-in newBoard
--- Main game loop
-gameLoop :: [Int] -> IO ()
-gameLoop board = do
-displayBoard board
-if isGameOver board then do
-putStrLn "Game Over! All stars are taken." else do
-putStrLn "Player's turn. Please enter row (1-5) and number of stars to remove:"
-input <- getLine
-let [row, stars] = map read (words input) :: [Int]
-if row < 1 || row > 5 || stars < 1 || stars > board !! (row - 1) then do
-putStrLn "Invalid move. Try again." gameLoop board
-else do
-let newBoard = makeMove board row stars
-gameLoop newBoard
--- Main function
-main :: IO ()
-main = do
-putStrLn "Welcome to the Game of Nim!" gameLoop initialBoard
-
-
-Comparison in hashskell 
-
-module Main where
-main :: IO ()
-main = do
-let squares = [x^2 | x <- [1..10]]
-let evens = [x | x <- [1..20], even x]
-let pairs = [(x, y) | x <- [1..3], y <- [4..6]]
-printsquares
-print evens
-print pairs
